@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Student Software Job Radar - software recruitment resources for students and freshers worldwide.">
+<title>Student Software Job Radar</title>
+<style>
+:root{--navy:#10264b;--blue:#2457c5;--cyan:#20b8c9;--ink:#18243a;--muted:#65738b;--line:#e4eaf2;--bg:#f4f7fb;--white:#fff;--green:#16845b}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(120deg,#10264b 0%,#1e4d91 65%,#167f9d 100%);color:white;padding:26px max(22px,calc((100% - 1180px)/2)) 34px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border:1px solid #ffffff66;border-radius:13px;display:grid;place-items:center;font-weight:800;letter-spacing:.5px;background:#ffffff18}.brand small{display:block;color:#c9d8ee;font-size:12px;letter-spacing:1.4px;text-transform:uppercase}.brand strong{font-size:17px}.pill{border:1px solid #ffffff55;border-radius:30px;padding:7px 13px;font-size:12px;color:#e8f4ff}
+.hero{max-width:1180px;margin:34px auto 0}.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.12;margin:0 0 12px;max-width:780px}.hero p{color:#d7e5f7;max-width:720px;margin:0 0 20px;font-size:16px}.hero-tags{display:flex;gap:9px;flex-wrap:wrap}.hero-tags span{background:#ffffff18;border:1px solid #ffffff35;padding:6px 11px;border-radius:20px;font-size:12px}
+main{max-width:1180px;margin:26px auto;padding:0 20px}.notice{background:#fff8e8;border:1px solid #f1dfb6;color:#70521a;padding:12px 15px;border-radius:12px;font-size:13px;margin-bottom:22px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}.stat{background:white;border:1px solid var(--line);border-radius:14px;padding:15px 17px}.stat b{display:block;font-size:21px;color:var(--navy)}.stat span{font-size:12px;color:var(--muted)}
+.toolbar{background:white;border:1px solid var(--line);border-radius:16px;padding:17px;margin-bottom:20px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}.field label{display:block;font-size:12px;font-weight:700;color:#53627a;margin-bottom:6px}.field input,.field select{width:100%;border:1px solid #d7dfeb;border-radius:9px;padding:11px 12px;font-size:14px;color:var(--ink);background:white;outline:none}.field input:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2457c51a}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:26px 0 13px}.section-head h2{margin:0;color:var(--navy);font-size:22px}.section-head p{margin:2px 0 0;color:var(--muted);font-size:13px}.count{font-size:12px;color:var(--muted)}
+.jobs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.job{background:white;border:1px solid var(--line);border-radius:15px;padding:18px;display:flex;flex-direction:column;min-height:250px;box-shadow:0 3px 12px #17345a08}.job-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.company{font-size:12px;color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:.7px}.job h3{margin:4px 0 7px;font-size:19px;color:var(--navy)}.job p{margin:0;color:var(--muted);font-size:13px}.taglist{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}.tag{font-size:11px;padding:4px 8px;border-radius:20px;background:#eef3fb;color:#405675}.job-meta{font-size:12px;color:#53627a;margin:2px 0 12px}.job-meta b{color:#263d60}.job-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:auto;padding-top:12px}.btn{display:inline-block;text-decoration:none;border-radius:9px;padding:9px 13px;font-size:12px;font-weight:700;border:1px solid var(--blue);color:var(--blue)}.btn.primary{background:var(--blue);color:white}.btn:hover{filter:brightness(.94)}.empty{display:none;background:white;border:1px dashed #cbd5e3;border-radius:13px;padding:28px;text-align:center;color:var(--muted);grid-column:1/-1}
+.tabbar{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 20px}
+.tab-button{border:1px solid #d6dfec;background:#fff;color:#294365;border-radius:10px;padding:11px 17px;font-size:14px;font-weight:750;cursor:pointer}
+.tab-button.active{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 4px 12px #10264b22}
+.tab-panel[hidden]{display:none}
+.latest-intro{background:#edf5ff;border:1px solid #d7e6fb;border-radius:12px;padding:13px 15px;color:#315176;font-size:13px;margin-bottom:15px}
+.table-wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px}
+.latest-table{border-collapse:collapse;width:100%;min-width:1050px;font-size:13px}
+.latest-table th{background:#10264b;color:#fff;text-align:left;padding:13px 12px;white-space:nowrap}
+.latest-table td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.latest-table tr:last-child td{border-bottom:0}
+.latest-table tbody tr:hover{background:#f8faff}
+.latest-table .role{font-weight:750;color:var(--navy);min-width:190px}
+.latest-table .req{min-width:330px;max-width:470px}
+.latest-table .req ul{padding-left:17px;margin:0}
+.latest-table .req li{margin:0 0 4px}
+.latest-table .apply-cell{white-space:nowrap}
+.status{display:inline-block;padding:4px 8px;border-radius:20px;font-size:11px;font-weight:750;background:#e5f6ed;color:#176b49}
+.status.warn{background:#fff1d9;color:#87570b}
+.status.closed{background:#fde8e8;color:#9c2929}
+ .source-note{font-size:12px;color:var(--muted);margin:12px 2px 0}
+.live-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:15px 0 24px}
+.live-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px;display:flex;flex-direction:column;gap:9px}
+.live-card h3{margin:0;color:var(--navy);font-size:17px}.live-card p{margin:0;color:var(--muted);font-size:13px}.live-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}.live-links a{display:inline-block;text-decoration:none;border:1px solid #cbd8ed;color:#244a87;background:#f4f7fc;border-radius:8px;padding:8px 10px;font-size:12px;font-weight:750}.live-links a.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.category-picker{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}
+.category-picker button{border:1px solid #cbd8ed;background:#fff;color:#244a87;border-radius:9px;padding:10px 14px;font-size:13px;font-weight:750;cursor:pointer}
+.category-picker button.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.results-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0 10px}
+.results-heading h3{margin:0;color:var(--navy);font-size:18px}
+.results-heading p{margin:0;color:var(--muted);font-size:12px}
+.results-table{width:100%;border-collapse:collapse;min-width:900px;font-size:13px}
+.results-table th{background:#10264b;color:#fff;text-align:left;padding:12px}
+.results-table td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+.results-table tr:last-child td{border-bottom:0}
+.results-table tbody tr:hover{background:#f8faff}
+.results-table .company-cell{font-weight:750;color:var(--navy);min-width:145px}
+.results-table .role-cell{font-weight:700;min-width:180px}
+.results-table .action-cell{white-space:nowrap}
+.results-table .action-cell a{display:inline-block;text-decoration:none;margin:2px 4px 2px 0;border-radius:7px;padding:7px 9px;font-size:11px;font-weight:750;background:var(--blue);color:white}
+.results-table .action-cell a.secondary{background:#eef3fb;color:#244a87;border:1px solid #cbd8ed}
+.guide-table{width:100%;border-collapse:collapse;min-width:720px;font-size:13px}.guide-table th{background:#10264b;color:white;text-align:left;padding:12px}.guide-table td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}.guide-table tr:last-child td{border-bottom:0}
+@media(max-width:760px){.live-grid{grid-template-columns:1fr}}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:19px}.panel h2{font-size:18px;color:var(--navy);margin:0 0 9px}.panel p,.panel li{font-size:13px;color:var(--muted)}.panel ul{padding-left:19px;margin:8px 0}.alert-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.alert-links a{font-size:12px;text-decoration:none;padding:9px 12px;border-radius:9px;background:#eef3fb;color:#244a87;font-weight:700}
+footer{background:#0d1f3c;color:#c4d1e3;padding:23px 20px;text-align:center;font-size:12px;margin-top:30px}footer strong{color:white}
+@media(max-width:760px){.toolbar{grid-template-columns:1fr}.jobs,.info-grid{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:12px}.stat b{font-size:18px}.hero{margin-top:25px}.tab-button{flex:1}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="brand"><div class="logo">SN</div><div><small>Student Software Job Radar</small><strong></strong></div>
+    <div class="pill">Worldwide opportunities · Students &amp; Freshers</div>
+  </div>
+  <div class="hero">
+    <h1>Find your next opportunity in technology.</h1>
+    <p>A central job-discovery page for students and fresh graduates. Explore software roles, understand common eligibility requirements and recruitment stages, and continue to the employer's official careers website to apply.</p>
+    <div class="hero-tags"><span>Software Engineering</span><span>Graduate Hiring</span><span>Internships</span><span>Global Careers</span></div>
+  </div>
+</header>
+<main>
+  <div class="notice"><strong>Important:</strong> This standalone HTML page uses internet-connected links to official employer career portals. It does not use a database or backend. Open a link to see vacancies currently published by the employer; availability, eligibility, location and deadlines can change.</div>
+  <nav class="tabbar" aria-label="Job Radar sections">
+    <button class="tab-button active" type="button" data-tab="portals" aria-selected="true">Company Career Portals</button>
+    <button class="tab-button" type="button" data-tab="latest" aria-selected="false">Latest Jobs <span aria-label="new">✦</span></button>
+  </nav>
+
+  <section class="tab-panel" id="portalsPanel">
+  <div class="stats">
+    <div class="stat"><b>Worldwide</b><span>Search employer career portals across regions</span></div>
+    <div class="stat"><b>Students + Freshers</b><span>Graduate, entry-level and internship pathways</span></div>
+    <div class="stat"><b>Official links</b><span>Apply and verify details with the employer</span></div>
+  </div>
+  <section class="toolbar" aria-label="Job filters">
+    <div class="field"><label for="search">Search role, skill or company</label><input id="search" type="search" placeholder="e.g. Java, software engineer, TCS"></div>
+    <div class="field"><label for="category">Job category</label><select id="category"><option value="all">All categories</option><option value="software">Software Development</option><option value="data">Data / AI / ML</option><option value="cloud">Cloud / DevOps</option><option value="internship">Internships</option><option value="graduate">Graduate Programmes</option></select></div>
+    <div class="field"><label for="level">Candidate level</label><select id="level"><option value="all">All levels</option><option value="fresher">Fresher / Entry level</option><option value="student">Student / Internship</option><option value="graduate">Graduate</option></select></div>
+  </section>
+
+  <div class="section-head"><div><h2>Explore employer opportunities</h2><p>Use the official career portal to find currently open positions.</p></div><div class="count" id="count">8 career portals</div></div>
+  <section class="jobs" id="jobs">
+    <article class="job" data-category="software graduate" data-level="fresher graduate" data-search="tcs tata consultancy services software developer ninja digital prime fresher graduate india programming">
+      <div class="job-top"><div><div class="company">Tata Consultancy Services</div><h3>Graduate &amp; Entry-Level Technology Roles</h3></div></div>
+      <p>Explore fresher recruitment, entry-level software roles and graduate hiring information.</p><div class="taglist"><span class="tag">C / C++ / Java</span><span class="tag">Problem Solving</span><span class="tag">Graduate Hiring</span></div>
+      <div class="job-meta"><b>Typical requirements:</b> Relevant degree, programming fundamentals and role-specific academic criteria.</div>
+      <div class="job-actions"><a class="btn primary" href="https://www.tcs.com/careers" target="_blank" rel="noopener">Official careers portal ↗</a></div>
+    </article>
+    <article class="job" data-category="software graduate" data-level="fresher graduate" data-search="infosys careers systems engineer specialist programmer graduate fresher india">
+      <div class="job-top"><div><div class="company">Infosys</div><h3>Systems Engineer &amp; Graduate Roles</h3></div></div>
+      <p>Check graduate hiring tracks, software engineering positions and early-career opportunities.</p><div class="taglist"><span class="tag">Programming</span><span class="tag">DBMS</span><span class="tag">Aptitude</span></div>
+      <div class="job-meta"><b>Typical requirements:</b> Degree and academic conditions specified in the individual job notice.</div>
+      <div class="job-actions"><a class="btn primary" href="https://www.infosys.com/careers/" target="_blank" rel="noopener">Official careers portal ↗</a></div>
+    </article>
+    <article class="job" data-category="software graduate" data-level="fresher graduate" data-search="wipro early careers graduate engineer trainee software developer fresher">
+      <div class="job-top"><div><div class="company">Wipro</div><h3>Early Careers &amp; Engineering Roles</h3></div></div>
+      <p>Look for entry-level engineering, campus hiring and early-career technology opportunities.</p><div class="taglist"><span class="tag">Coding</span><span class="tag">Communication</span><span class="tag">Graduate</span></div>
+      <div class="job-meta"><b>Typical requirements:</b> Eligible graduation year, degree and marks criteria as published for each drive.</div>
+      <div class="job-actions"><a class="btn primary" href="https://careers.wipro.com/" target="_blank" rel="noopener">Official careers portal ↗</a></div>
+    </article>
+    <article class="job" data-category="software graduate" data-level="fresher graduate" data-search="accenture entry level associate software engineer graduate careers">
+      <div class="job-top"><div><div class="company">Accenture</div><h3>Associate Software &amp; Technology Roles</h3></div></div>
+      <p>Search entry-level opportunities in application development, technology and consulting.</p><div class="taglist"><span class="tag">Software Development</span><span class="tag">Cloud</span><span class="tag">Testing</span></div>
+      <div class="job-meta"><b>Typical requirements:</b> Relevant education, technical skills and any location-specific eligibility.</div>
+      <div class="job-actions"><a class="btn primary" href="https://www.accenture.com/careers" target="_blank" rel="noopener">Official careers portal ↗</a></div>
+    </article>
+    <article class="job" data-category="data cloud software" data-level="fresher graduate" data-search="ibm entry level careers software developer data artificial intelligence cloud">
+      <div class="job-top"><div><div class="company">IBM</div><h3>Software, Data &amp; AI Opportunities</h3></div></div>
+      <p>Explore early-professional positions in software, data, AI, infrastructure and cloud.</p><div class="taglist"><span class="tag">Python</span><span class="tag">AI / ML</span><span class="tag">Cloud</span></div>
+      <div class="job-meta"><b>Typical requirements:</b> Role-specific programming, analytical or cloud skills.</div>
+      <div class="job-actions"><a class="btn primary" href="https://www.ibm.com/careers" target="_blank" rel="noopener">Official careers portal ↗</a></div>
+    </article>
+    <article class="job" data-category="software data cloud" data-level="fresher graduate" data-search="microsoft careers university graduates software engineer data scientist cloud">
+      <div class="job-top"><div><div class="company">Microsoft</div><h3>University &amp; Early-Career Roles</h3></div></div>
+      <p>Find university recruiting, software engineering and other early-career opportunities by region.</p><div class="taglist"><span class="tag">DSA</span><span class="tag">Software Engineering</span><span class="tag">AI</span></div>
+      <div class="job-meta"><b>Typical requirements:</b> Relevant degree, coding and problem-solving skills; requirements vary by role.</div>
+      <div class="job-actions"><a class="btn primary" href="https://jobs.careers.microsoft.com/" target="_blank" rel="noopener">Official jobs portal ↗</a></div>
+    </article>
+    <article class="job" data-category="internship software" data-level="student" data-search="google students internships software engineering careers">
+      <div class="job-top"><div><div class="company">Google</div><h3>Student &amp; Internship Opportunities</h3></div></div>
+      <p>Explore internships and student opportunities in software engineering and related disciplines.</p><div class="taglist"><span class="tag">Internship</span><span class="tag">Algorithms</span><span class="tag">Programming</span></div>
+      <div class="job-meta"><b>Typical requirements:</b> Current student status for many internships; check each programme's criteria.</div>
+      <div class="job-actions"><a class="btn primary" href="https://www.google.com/about/careers/applications/" target="_blank" rel="noopener">Official careers portal ↗</a></div>
+    </article>
+    <article class="job" data-category="internship graduate software" data-level="student graduate" data-search="amazon student programs internships graduate software development engineer">
+      <div class="job-top"><div><div class="company">Amazon</div><h3>Student, Graduate &amp; SDE Roles</h3></div></div>
+      <p>Search student programmes, internships and software development opportunities across locations.</p><div class="taglist"><span class="tag">DSA</span><span class="tag">OOP</span><span class="tag">Internship</span></div>
+      <div class="job-meta"><b>Typical requirements:</b> Programming, data structures and role-specific degree or graduation criteria.</div>
+      <div class="job-actions"><a class="btn primary" href="https://www.amazon.jobs/" target="_blank" rel="noopener">Official jobs portal ↗</a></div>
+    </article>
+    <div class="empty" id="empty">No matching career portals. Try a different keyword or filter.</div>
+  </section>
+
+  <section class="info-grid">
+    <div class="panel"><h2>What should students prepare?</h2>
+      <ul><li>C programming, Java or Python fundamentals</li><li>Data Structures and Algorithms (arrays, strings, linked lists, stacks, queues, trees, sorting and searching)</li><li>OOP, DBMS, SQL, Operating Systems and Computer Networks</li><li>Problem solving on practice platforms and timed coding assessments</li><li>Resume, projects, communication and interview preparation</li></ul>
+    </div>
+    <div class="panel"><h2>Common recruitment procedure</h2>
+      <ol><li>Online application and eligibility screening</li><li>Aptitude, reasoning and/or technical assessment</li><li>Coding test or technical interview</li><li>Technical and managerial interview rounds</li><li>HR discussion, document verification and offer</li></ol>
+      <p><em>Stages differ by employer, role, country and recruitment drive.</em></p>
+    </div>
+  </section>
+  <section class="info-grid">
+    <div class="panel"><h2>Email &amp; WhatsApp alerts</h2>
+      <p>This HTML file works independently and does not collect student details. To deliver automatic alerts, it must be connected to an approved email service and WhatsApp Business/API workflow, or to an institutional mailing list and official WhatsApp channel.</p>
+      <div class="alert-links"><a href="mailto:?subject=%20Student%20Software%20Job%20Radar%20-%20Job%20Alert&body=Please%20share%20the%20latest%20verified%20software%20job%20opportunities%20for%20%20students.">Open email</a><a href="https://www.whatsapp.com/" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+    <div class="panel"><h2>For students</h2>
+      <p>Before applying, verify the job title, location, graduation year, eligible branches, minimum marks, backlog rules, experience requirement, salary details and application deadline on the official employer page.</p>
+      <p>Never pay money to an individual for a job offer. Use official company websites and verified recruitment communications.</p>
+    </div>
+  </section>
+  </section>
+
+  <section class="tab-panel" id="latestPanel" hidden>
+    <div class="section-head">
+      <div><h2>Latest Jobs &amp; Recruitment Notifications</h2><p>Open live employer searches for current fresher, graduate, internship and software development vacancies.</p></div>
+      <div class="count">Official career links</div>
+    </div>
+    <div class="latest-intro"><strong>How live updates work:</strong> These links open the employers’ own career websites and search pages. Vacancies shown there are controlled and updated by each employer. This static HTML page does not scrape job listings or automatically import them, and it requires no database, backend, login or registration.</div>
+
+    <div class="section-head"><div><h2>Browse live vacancies by company</h2><p>Select a role category or open the company's full career portal.</p></div></div>
+    <div class="live-grid">
+      <article class="live-card"><h3>TCS – Tata Consultancy Services</h3><p>Graduate hiring, entry-level IT roles and experienced technology positions. Check the current eligibility for each drive.</p><div class="live-links"><a class="primary" href="https://www.tcs.com/careers/india" target="_blank" rel="noopener">Apply / View Latest Jobs ↗</a><a href="https://www.tcs.com/careers" target="_blank" rel="noopener">Global careers ↗</a></div></article>
+      <article class="live-card"><h3>Infosys</h3><p>Explore graduate, specialist programmer, software engineering and internship opportunities.</p><div class="live-links"><a class="primary" href="https://www.infosys.com/careers/apply/" target="_blank" rel="noopener">Apply / View Latest Jobs ↗</a><a href="https://career.infosys.com/" target="_blank" rel="noopener">Career search ↗</a></div></article>
+      <article class="live-card"><h3>Wipro</h3><p>Search early-career, engineering, technology and internship opportunities by location.</p><div class="live-links"><a class="primary" href="https://careers.wipro.com/" target="_blank" rel="noopener">Apply / View Latest Jobs ↗</a></div></article>
+      <article class="live-card"><h3>Accenture</h3><p>Find entry-level, associate software engineer, application development and internship roles.</p><div class="live-links"><a class="primary" href="https://www.accenture.com/in-en/careers" target="_blank" rel="noopener">Apply / View Latest Jobs ↗</a><a href="https://www.accenture.com/in-en/careers/jobsearch" target="_blank" rel="noopener">Search jobs ↗</a></div></article>
+      <article class="live-card"><h3>IBM</h3><p>Search software developer, associate developer, data, AI, cloud and entry-level roles.</p><div class="live-links"><a class="primary" href="https://www.ibm.com/careers/search" target="_blank" rel="noopener">Apply / View Latest Jobs ↗</a></div></article>
+      <article class="live-card"><h3>Microsoft</h3><p>Explore software engineering, university recruiting, internships and graduate opportunities worldwide.</p><div class="live-links"><a class="primary" href="https://careers.microsoft.com/" target="_blank" rel="noopener">Apply / View Latest Jobs ↗</a></div></article>
+      <article class="live-card"><h3>Google</h3><p>Search software engineering, university graduate, student researcher and internship openings.</p><div class="live-links"><a class="primary" href="https://www.google.com/about/careers/applications/" target="_blank" rel="noopener">Apply / View Latest Jobs ↗</a></div></article>
+      <article class="live-card"><h3>Amazon</h3><p>Explore software development engineer, student programmes, internships and graduate hiring.</p><div class="live-links"><a class="primary" href="https://www.amazon.jobs/" target="_blank" rel="noopener">Apply / View Latest Jobs ↗</a><a href="https://www.amazon.jobs/en/teams/university-tech" target="_blank" rel="noopener">University tech roles ↗</a></div></article>
+      <article class="live-card"><h3>Oracle</h3><p>Find entry-level software development, cloud engineering and university recruiting roles.</p><div class="live-links"><a class="primary" href="https://www.oracle.com/in/careers/" target="_blank" rel="noopener">Apply / View Latest Jobs ↗</a></div></article>
+      <article class="live-card"><h3>Cognizant</h3><p>Explore campus hiring, graduate trainee and software engineering opportunities.</p><div class="live-links"><a class="primary" href="https://careers.cognizant.com/india-en/" target="_blank" rel="noopener">Apply / View Latest Jobs ↗</a></div></article>
+    </div>
+
+    <div class="section-head"><div><h2>Find opportunities by category</h2><p>Click a category to display a company-wise table of live search links and general eligibility guidance.</p></div></div>
+    <div class="category-picker" role="group" aria-label="Choose job category">
+      <button type="button" class="active" data-job-category="internship" aria-pressed="true">Internships</button>
+      <button type="button" data-job-category="fresher" aria-pressed="false">Freshers / Entry-Level</button>
+      <button type="button" data-job-category="graduate" aria-pressed="false">Graduate Recruitment</button>
+      <button type="button" data-job-category="developer" aria-pressed="false">Software Developer</button>
+    </div>
+    <div class="results-heading"><h3 id="categoryTitle">Internship Opportunities</h3><p id="categoryDescription">Search current student and internship vacancies from employer career websites.</p></div>
+    <div class="table-wrap">
+      <table class="results-table">
+        <thead><tr><th>Company</th><th>Opportunity / Search</th><th>Basic eligibility to verify</th><th>Location</th><th>Links</th></tr></thead>
+        <tbody id="categoryResults"></tbody>
+      </table>
+    </div>
+    <p class="source-note">Important: These are live search links, not a stored list of confirmed vacancies. Search results and employer portals show the vacancies available at the time you open them. Always check the official job description and application deadline.</p>
+
+    <div class="section-head"><div><h2>Basic eligibility guide</h2><p>General guidance only. These are not universal or guaranteed requirements.</p></div></div>
+    <div class="table-wrap"><table class="guide-table"><thead><tr><th>Area</th><th>Common expectation</th><th>What students should verify in each notification</th></tr></thead><tbody>
+      <tr><td><strong>Education</strong></td><td>B.E./B.Tech, B.Sc., BCA, MCA, M.E./M.Tech or another relevant qualification, depending on the role.</td><td>Accepted degrees, eligible branches, graduation year and whether current students can apply.</td></tr>
+      <tr><td><strong>Academic record</strong></td><td>Some employers specify minimum marks/CGPA and backlog conditions; others assess candidates differently.</td><td>Minimum percentage/CGPA, active or historical backlog rules and education gaps.</td></tr>
+      <tr><td><strong>Technical skills</strong></td><td>Programming fundamentals in C, C++, Java or Python; problem solving, DSA, OOP and basic DBMS/SQL.</td><td>Required programming language, frameworks, tools, domain skills and experience level.</td></tr>
+      <tr><td><strong>Internships</strong></td><td>Many internships are intended for students currently enrolled in a degree programme.</td><td>Expected graduation date, internship duration, work location and availability.</td></tr>
+      <tr><td><strong>Communication</strong></td><td>Ability to explain projects, approach problems and communicate with a team.</td><td>Language requirements, interview format and any location/work-authorisation conditions.</td></tr>
+    </tbody></table></div>
+
+    <div class="info-grid">
+      <div class="panel"><h2>Common recruitment procedure</h2><ol><li>Online application and eligibility screening</li><li>Aptitude, reasoning or communication assessment (where applicable)</li><li>Programming / coding assessment or technical test</li><li>Technical interview(s), project discussion or practical round</li><li>HR discussion, document verification and offer</li></ol><p><em>The sequence and number of rounds vary by employer, role, location and hiring programme.</em></p></div>
+      <div class="panel"><h2>Before clicking Apply</h2><ul><li>Confirm that the vacancy is currently open on the official employer website.</li><li>Check graduation year, branch, marks/CGPA and backlog criteria.</li><li>Review the job description, location, work mode and application deadline.</li><li>Use the official application page and never pay a recruitment fee.</li></ul></div>
+    </div>
+  </section>
+</main>
+<footer><strong>Student Software Job Radar</strong><br>Student career information resource<br>Career links are provided for discovery; employers control vacancies, eligibility and recruitment.</footer>
+<script>
+const tabButtons = [...document.querySelectorAll('.tab-button')];
+const portalsPanel = document.getElementById('portalsPanel');
+const latestPanel = document.getElementById('latestPanel');
+tabButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const showLatest = button.dataset.tab === 'latest';
+    portalsPanel.hidden = showLatest;
+    latestPanel.hidden = !showLatest;
+    tabButtons.forEach(item => {
+      const active = item === button;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  });
+});
+
+const search = document.getElementById('search');
+const category = document.getElementById('category');
+const level = document.getElementById('level');
+const cards = [...document.querySelectorAll('.job')];
+const count = document.getElementById('count');
+const empty = document.getElementById('empty');
+function filterJobs(){
+  const q = search.value.trim().toLowerCase();
+  const c = category.value;
+  const l = level.value;
+  let shown = 0;
+  cards.forEach(card => {
+    const matchesText = card.dataset.search.includes(q) || card.innerText.toLowerCase().includes(q);
+    const matchesCategory = c === 'all' || card.dataset.category.split(' ').includes(c);
+    const matchesLevel = l === 'all' || card.dataset.level.split(' ').includes(l);
+    const visible = matchesText && matchesCategory && matchesLevel;
+    card.style.display = visible ? 'flex' : 'none';
+    if(visible) shown++;
+  });
+  count.textContent = shown + (shown === 1 ? ' portal' : ' portals');
+  empty.style.display = shown ? 'none' : 'block';
+}
+search.addEventListener('input', filterJobs);
+category.addEventListener('change', filterJobs);
+level.addEventListener('change', filterJobs);
+
+
+// Category-wise live job discovery table. This uses public web search links and
+// official employer career pages; no database, backend or student login is used.
+const employers = [
+  {name:'TCS', domain:'tcs.com', careers:'https://www.tcs.com/careers/india', location:'India / Worldwide'},
+  {name:'Infosys', domain:'infosys.com', careers:'https://www.infosys.com/careers/apply/', location:'India / Worldwide'},
+  {name:'Wipro', domain:'wipro.com', careers:'https://careers.wipro.com/', location:'India / Worldwide'},
+  {name:'Accenture', domain:'accenture.com', careers:'https://www.accenture.com/in-en/careers', location:'India / Worldwide'},
+  {name:'IBM', domain:'ibm.com', careers:'https://www.ibm.com/careers/search', location:'India / Worldwide'},
+  {name:'Microsoft', domain:'careers.microsoft.com', careers:'https://careers.microsoft.com/', location:'Worldwide'},
+  {name:'Google', domain:'google.com/about/careers', careers:'https://www.google.com/about/careers/applications/', location:'Worldwide'},
+  {name:'Amazon', domain:'amazon.jobs', careers:'https://www.amazon.jobs/', location:'India / Worldwide'},
+  {name:'Oracle', domain:'oracle.com', careers:'https://www.oracle.com/in/careers/', location:'India / Worldwide'},
+  {name:'Cognizant', domain:'careers.cognizant.com', careers:'https://careers.cognizant.com/india-en/', location:'India / Worldwide'}
+];
+const categoryConfig = {
+  internship: {
+    title:'Internship Opportunities',
+    description:'Search current student internships in software, data, AI/ML, cloud and related technology areas.',
+    role:'Software / Technology Intern',
+    terms:'software engineering internship OR technology intern OR data science intern',
+    eligibility:'Usually for students currently pursuing a relevant degree; check eligible graduation year, duration, location and availability.'
+  },
+  fresher: {
+    title:'Fresher / Entry-Level Jobs',
+    description:'Search entry-level and fresher openings suitable for recent graduates.',
+    role:'Graduate Trainee / Entry-Level Engineer',
+    terms:'fresher OR entry level OR associate software engineer OR graduate engineer trainee',
+    eligibility:'Recent graduates in an accepted discipline; verify graduation year, branch, marks/CGPA, backlogs and experience conditions.'
+  },
+  graduate: {
+    title:'Graduate Recruitment',
+    description:'Search graduate programmes, university hiring and new-college-graduate roles.',
+    role:'University Graduate / Graduate Programme',
+    terms:'university graduate OR new college graduate OR graduate programme OR campus hiring',
+    eligibility:'Degree and graduation date must match the programme; some roles accept final-year students while others require completed degrees.'
+  },
+  developer: {
+    title:'Software Developer Opportunities',
+    description:'Search software developer, software engineer, SDE and application developer vacancies.',
+    role:'Software Developer / Software Engineer',
+    terms:'software developer OR software engineer OR software development engineer OR application developer',
+    eligibility:'Relevant degree or equivalent experience, programming fundamentals and role-specific skills such as DSA, OOP, databases or frameworks.'
+  }
+};
+const categoryButtons = [...document.querySelectorAll('[data-job-category]')];
+const categoryResults = document.getElementById('categoryResults');
+const categoryTitle = document.getElementById('categoryTitle');
+const categoryDescription = document.getElementById('categoryDescription');
+function renderCategory(key){
+  const config = categoryConfig[key];
+  categoryTitle.textContent = config.title;
+  categoryDescription.textContent = config.description;
+  categoryResults.innerHTML = '';
+  employers.forEach(employer => {
+    const query = `site:${employer.domain} careers ${config.terms}`;
+    const searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+    const row = document.createElement('tr');
+    const values = [employer.name, config.role, config.eligibility, employer.location];
+    values.forEach((value, index) => {
+      const cell = document.createElement('td');
+      cell.textContent = value;
+      if(index === 0) cell.className = 'company-cell';
+      if(index === 1) cell.className = 'role-cell';
+      row.appendChild(cell);
+    });
+    const action = document.createElement('td');
+    action.className = 'action-cell';
+    const searchLink = document.createElement('a');
+    searchLink.href = searchUrl;
+    searchLink.target = '_blank';
+    searchLink.rel = 'noopener';
+    searchLink.textContent = 'Search Openings ↗';
+    const careerLink = document.createElement('a');
+    careerLink.href = employer.careers;
+    careerLink.target = '_blank';
+    careerLink.rel = 'noopener';
+    careerLink.className = 'secondary';
+    careerLink.textContent = 'Company Careers ↗';
+    action.append(searchLink, careerLink);
+    row.appendChild(action);
+    categoryResults.appendChild(row);
+  });
+  categoryButtons.forEach(button => {
+    const active = button.dataset.jobCategory === key;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', active ? 'true' : 'false');
+  });
+}
+categoryButtons.forEach(button => button.addEventListener('click', () => renderCategory(button.dataset.jobCategory)));
+renderCategory('internship');
+</script>
+</body>
+</html>
